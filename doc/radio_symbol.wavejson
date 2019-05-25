@@ -1,0 +1,10 @@
+{
+  "head": {
+    "text": "Radio symbol"
+  },
+  "signal": [
+    {"wave": "01.0|1" },
+    {"node": ".a.b.c"}
+  ],
+  "edge": ["a<->b T", "b<->c N*T"]
+}
