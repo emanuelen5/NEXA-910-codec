@@ -3,8 +3,8 @@
     "text": "Radio symbol"
   },
   "signal": [
-    {"wave": "01.0|1" },
-    {"node": ".a.b.c"}
+    {"name": "Logical level", "wave": "01.0|1" },
+    {"name": "Time", "node": ".a.b.c"}
   ],
-  "edge": ["a<->b T", "b<->c N*T"]
+  "edge": ["a<->b T<sub>H", "b<->c N*T<sub>L"]
 }
