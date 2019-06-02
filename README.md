@@ -23,6 +23,8 @@ There are four radio symbols. Their meaning and timing are described in the tabl
 |    **S**     | Start symbol                |   `T` | 10*`T` |
 |    **P**     | Stop symbol                 |   `T` | 40*`T` |
 
+![Diagram of radio symbols](./doc/radio_symbol.svg)
+
 ### Data symbols
 
 The data symbols (0 and 1) consist of a **0** and a **1** radio symbol. This makes each bit of data take a constant time to transfer on the radio link, which nice from a decoding perspective.
