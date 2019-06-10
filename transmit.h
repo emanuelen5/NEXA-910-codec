@@ -6,7 +6,7 @@
 class Transmitter {
 public:
     Transmitter(int pin) : pin(pin){};
-    virtual void send_packet(uint8_t *byte, uint8_t len);
+    virtual void send_packet(uint8_t *bytes, uint8_t len);
 protected:
     int pin;
 };
@@ -14,9 +14,9 @@ protected:
 class NEXA_Transmitter : Transmitter {
 public:
     NEXA_Transmitter(int pin) : Transmitter(pin) {};
-    void send_packet(uint8_t *byte, uint8_t len);
+    void send_packet(uint8_t *bytes, uint8_t len);
 protected:
-    int T; // Base time unit
+    int T=250; // Base time unit in us
     enum symbol_t {
         ZERO,
         ONE,
@@ -24,6 +24,7 @@ protected:
         START
     };
 
+    void send_byte(uint8_t byte);
     void send_data_symbol(symbol_t symbol);
     void send_radio_symbol(symbol_t symbol);
 

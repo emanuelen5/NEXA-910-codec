@@ -1,14 +1,20 @@
 #include "transmit.h"
 
-void NEXA_Transmitter::send_packet(uint8_t *byte, uint8_t len) {
+void NEXA_Transmitter::send_packet(uint8_t *bytes, uint8_t len) {
 	send_data_symbol(START);
 	for (int i=0; i<len; i++) {
-		if (byte[i])
+		send_byte(bytes[i]);
+	}
+	send_data_symbol(STOP);
+}
+
+void NEXA_Transmitter::send_byte(uint8_t byte) {
+	for (uint8_t b=0; b<8; b++) {
+		if ((byte >> (8-b)) & 1)
 			send_data_symbol(ONE);
 		else
 			send_data_symbol(ZERO);
 	}
-	send_data_symbol(STOP);
 }
 
 void NEXA_Transmitter::send_data_symbol(symbol_t symbol) {
@@ -27,16 +33,16 @@ void NEXA_Transmitter::send_data_symbol(symbol_t symbol) {
 }
 
 void NEXA_Transmitter::send_radio_symbol(symbol_t symbol) {
-	int delay_time;
+	int high_time_us = 0;
 	switch (symbol) {
-		case ZERO:  delay_time =    T; break;
-		case ONE:   delay_time =  5*T; break;
-		case START: delay_time = 10*T; break;
-		case STOP:  delay_time = 40*T; break;
+		case ZERO:  high_time_us =    T; break;
+		case ONE:   high_time_us =  5*T; break;
+		case START: high_time_us = 10*T; break;
+		case STOP:  high_time_us = 40*T; break;
 	}
 
 	digitalWrite(pin, HIGH);
-	delay(delay_time);
+	delayMicroseconds(high_time_us);
 	digitalWrite(pin, LOW);
-	delay(T);
+	delayMicroseconds(T);
 }
