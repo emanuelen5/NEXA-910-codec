@@ -1,0 +1,9 @@
+language: cpp
+os: linux
+
+install:
+  - sudo apt update
+  - sudo apt install arduino arduino-mk
+script:
+  - make
+

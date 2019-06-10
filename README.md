@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/emanuelen5/NEXA-910-codec.svg?branch=master)](https://travis-ci.org/emanuelen5/NEXA-910-codec)
 # NEXA PET-910 codec
 
 Codec for the NEXA-910 remote switches.
