@@ -1,3 +1,4 @@
+#include "Arduino.h"
 #include "transmit.h"
 
 void NEXA_Transmitter::send_packet(uint8_t *bytes, uint8_t len) {
@@ -33,16 +34,16 @@ void NEXA_Transmitter::send_data_symbol(symbol_t symbol) {
 }
 
 void NEXA_Transmitter::send_radio_symbol(symbol_t symbol) {
-	int high_time_us = 0;
+	int low_time_us = 0;
 	switch (symbol) {
-		case ZERO:  high_time_us =    T; break;
-		case ONE:   high_time_us =  5*T; break;
-		case START: high_time_us = 10*T; break;
-		case STOP:  high_time_us = 40*T; break;
+		case ZERO:  low_time_us =    T; break;
+		case ONE:   low_time_us =  5*T; break;
+		case START: low_time_us = 10*T; break;
+		case STOP:  low_time_us = 40*T; break;
 	}
 
 	digitalWrite(pin, HIGH);
-	delayMicroseconds(high_time_us);
-	digitalWrite(pin, LOW);
 	delayMicroseconds(T);
+	digitalWrite(pin, LOW);
+	delayMicroseconds(low_time_us);
 }
