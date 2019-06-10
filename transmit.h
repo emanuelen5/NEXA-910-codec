@@ -3,19 +3,15 @@
 
 #include "Arduino.h"
 
-class Transmitter {
+class NEXA_Transmitter {
 public:
-    Transmitter(int pin) : pin(pin){};
-    virtual void send_packet(uint8_t *bytes, uint8_t len);
-protected:
-    int pin;
-};
-
-class NEXA_Transmitter : Transmitter {
-public:
-    NEXA_Transmitter(int pin) : Transmitter(pin) {};
+    NEXA_Transmitter(int pin) : pin(pin) {
+        pinMode(pin, OUTPUT);
+        digitalWrite(pin, LOW);
+    };
     void send_packet(uint8_t *bytes, uint8_t len);
 protected:
+    int pin;
     int T=250; // Base time unit in us
     enum symbol_t {
         ZERO,
