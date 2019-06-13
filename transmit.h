@@ -19,6 +19,7 @@ public:
         digitalWrite(pin, LOW);
     };
     void send_packet(uint8_t *bytes, uint8_t len);
+    void send_packet(uint8_t *bytes, uint8_t len, uint8_t repeat_count);
 protected:
     int T=250; // Base time unit in us
     enum symbol_t {
