@@ -12,7 +12,14 @@ void setup() {
 }
 
 void loop() {
-	Serial.println("Sending again");
+	static int send_count = 0; 
+	Serial.print("Sending ");
+	Serial.println(send_count);
 	delay(1000);
 	nt.send_packet(ON_3, 4);
+	nt.send_packet(ON_3, 4);
+	nt.send_packet(ON_3, 4);
+	nt.send_packet(ON_3, 4);
+	nt.send_packet(ON_3, 4);
+	send_count++;
 }
