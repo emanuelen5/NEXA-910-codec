@@ -10,7 +10,7 @@ void NEXA_Transmitter::send_packet(uint8_t *bytes, uint8_t len) {
 }
 
 void NEXA_Transmitter::send_byte(uint8_t byte) {
-	for (uint8_t b=0; b<8; b++) {
+	for (uint8_t b=1; b<=8; b++) {
 		if ((byte >> (8-b)) & 1)
 			send_data_symbol(ONE);
 		else
