@@ -43,20 +43,36 @@ void loop() {
 			Serial.println("NEXA 910 transmitter");
 		} else if (STREQ(input_buffer, "1 on")) {
 			nt.send_packet(SWITCH_1_ON, 4, repeat_count);
+			Serial.print("OK: ");
+			Serial.println(input_buffer);
 		} else if (STREQ(input_buffer, "1 off")) {
 			nt.send_packet(SWITCH_1_OFF, 4, repeat_count);
+			Serial.print("OK: ");
+			Serial.println(input_buffer);
 		} else if (STREQ(input_buffer, "2 on")) {
 			nt.send_packet(SWITCH_2_ON, 4, repeat_count);
+			Serial.print("OK: ");
+			Serial.println(input_buffer);
 		} else if (STREQ(input_buffer, "2 off")) {
 			nt.send_packet(SWITCH_2_OFF, 4, repeat_count);
+			Serial.print("OK: ");
+			Serial.println(input_buffer);
 		} else if (STREQ(input_buffer, "3 on")) {
 			nt.send_packet(SWITCH_3_ON, 4, repeat_count);
+			Serial.print("OK: ");
+			Serial.println(input_buffer);
 		} else if (STREQ(input_buffer, "3 off")) {
 			nt.send_packet(SWITCH_3_OFF, 4, repeat_count);
+			Serial.print("OK: ");
+			Serial.println(input_buffer);
 		} else if (STREQ(input_buffer, "all on")) {
 			nt.send_packet(SWITCH_ALL_ON, 4, repeat_count);
+			Serial.print("OK: ");
+			Serial.println(input_buffer);
 		} else if (STREQ(input_buffer, "all off")) {
 			nt.send_packet(SWITCH_ALL_OFF, 4, repeat_count);
+			Serial.print("OK: ");
+			Serial.println(input_buffer);
 		} else {
 			Serial.print("Unknown command: ");
 			Serial.println(input_buffer);
