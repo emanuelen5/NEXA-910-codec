@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "transmit.h"
 
-void NEXA_Transmitter::send_packet(uint8_t *bytes, uint8_t len) {
+void NEXA_Protocol_Transmitter::send_packet(uint8_t *bytes, uint8_t len) {
 	send_data_symbol(START);
 	for (int i=0; i<len; i++) {
 		send_byte(bytes[i]);
@@ -9,13 +9,13 @@ void NEXA_Transmitter::send_packet(uint8_t *bytes, uint8_t len) {
 	send_data_symbol(STOP);
 }
 
-void NEXA_Transmitter::send_packet(uint8_t *bytes, uint8_t len, uint8_t repeat_count) {
+void Transmitter::send_packet(uint8_t *bytes, uint8_t len, uint8_t repeat_count) {
 	for (int i=0; i<repeat_count; i++) {
 		send_packet(bytes, len);
 	}
 }
 
-void NEXA_Transmitter::send_byte(uint8_t byte) {
+void NEXA_Protocol_Transmitter::send_byte(uint8_t byte) {
 	for (uint8_t b=1; b<=8; b++) {
 		if ((byte >> (8-b)) & 1)
 			send_data_symbol(ONE);
@@ -24,7 +24,7 @@ void NEXA_Transmitter::send_byte(uint8_t byte) {
 	}
 }
 
-void NEXA_Transmitter::send_data_symbol(symbol_t symbol) {
+void NEXA_Protocol_Transmitter::send_data_symbol(symbol_t symbol) {
 	switch (symbol) {
 		case ZERO:
 			send_radio_symbol(ONE);
@@ -39,7 +39,7 @@ void NEXA_Transmitter::send_data_symbol(symbol_t symbol) {
 	}
 }
 
-void NEXA_Transmitter::send_radio_symbol(symbol_t symbol) {
+void NEXA_Protocol_Transmitter::send_radio_symbol(symbol_t symbol) {
 	int low_time_us = 0;
 	switch (symbol) {
 		case ZERO:  low_time_us =    T; break;

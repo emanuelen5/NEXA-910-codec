@@ -2,7 +2,7 @@
 #include <string.h>
 
 #define TX_PIN 8
-NEXA_Transmitter nt(TX_PIN);
+NEXA_Protocol_Transmitter nt(TX_PIN);
 uint8_t SWITCH_1_ON[]    = {0x89, 0x47, 0x4E, 0x6F};
 uint8_t SWITCH_1_OFF[]   = {0x89, 0x47, 0x4E, 0x7F};
 uint8_t SWITCH_2_ON[]    = {0x89, 0x47, 0x4E, 0x6E};
