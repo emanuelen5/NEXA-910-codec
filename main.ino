@@ -26,11 +26,27 @@ bool input_available(void) {
 	return false;
 }
 
+void print_help(void) {
+	Serial.print("NEXA 910 transmitter. Connect transmitter to pin ");
+	Serial.print(TX_PIN, DEC);
+	Serial.println("");
+	Serial.println("Usage: Send commands over serial port.");
+	Serial.println("Commands:");
+	Serial.println("1|2|3|all on|off");
+	Serial.println("    turn switch(es) on/off:");
+	Serial.println("version");
+	Serial.println("    print build info");
+	Serial.println("help");
+	Serial.println("    print this help");
+	Serial.println("?");
+	Serial.println("    print descriptive name of device");
+}
+
 void setup() {
 	Serial.begin(115200);
-	Serial.print("Starting board. Connect transmitter to pin ");
-	Serial.println(TX_PIN, DEC);
 	Serial.setTimeout(50);
+	print_help();
+	Serial.print(">> ");
 }
 
 #define STREQ(STR1, STR2) (strcmp(STR1, STR2) == 0)
@@ -39,6 +55,13 @@ void loop() {
 		// Do something with the received input command
 		if (STREQ(input_buffer, "?")) {
 			Serial.println("NEXA 910 transmitter");
+		} else if (STREQ(input_buffer, "help")) {
+			print_help();
+		} else if (STREQ(input_buffer, "version")) {
+			Serial.print("Build date: ");
+			Serial.print(__DATE__);
+			Serial.print(" ");
+			Serial.println(__TIME__);
 		} else if (STREQ(input_buffer, "1 on")) {
 			controller.set_switch(0, NEXA_Switch_Controller::ON);
 			Serial.print("OK: ");
@@ -71,9 +94,11 @@ void loop() {
 			controller.set_group(NEXA_Switch_Controller::OFF);
 			Serial.print("OK: ");
 			Serial.println(input_buffer);
-		} else {
-			Serial.print("Unknown command: ");
+		} else if (strlen(input_buffer) > 0) {
+			Serial.print("Unknown command received: ");
 			Serial.println(input_buffer);
+			print_help();
 		}
+		Serial.print(">> ");
 	}
 }
