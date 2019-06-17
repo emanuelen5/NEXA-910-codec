@@ -35,7 +35,6 @@ void setup() {
 
 #define STREQ(STR1, STR2) (strcmp(STR1, STR2) == 0)
 void loop() {
-	const uint8_t repeat_count = 5;
 	if (input_available()) {
 		// Do something with the received input command
 		if (STREQ(input_buffer, "?")) {
