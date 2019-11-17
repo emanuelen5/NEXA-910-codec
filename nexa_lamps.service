@@ -1,0 +1,14 @@
+[Unit]
+Description=NEXA light control web server
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=emaus
+WorkingDirectory=/home/emaus/NEXA-910-codec
+ExecStart=/usr/bin/env bash -c "source /home/emaus/venv/bin/activate && ./start_server.sh"
+
+[Install]
+WantedBy=multi-user.target
