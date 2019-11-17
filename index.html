@@ -1,22 +1,48 @@
-<head>
+<!doctype html>
+<html>
+<head lang="en">
+    <!-- Required meta tags -->
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>NEXA lamp control page</title>
 </head>
 <body>
-    <button onclick="$.get('/lamp', {lamp:1, state:'on'}, success=success)">Lamp 1 on</button>
-	<button onclick="$.get('/lamp', {lamp:1, state:'off'}, success=success)">Lamp 1 off</button><br>
-    <button onclick="$.get('/lamp', {lamp:2, state:'on'}, success=success)">Lamp 2 on</button>
-	<button onclick="$.get('/lamp', {lamp:2, state:'off'}, success=success)">Lamp 2 off</button><br>
-    <button onclick="$.get('/lamp', {lamp:3, state:'on'}, success=success)">Lamp 3 on</button>
-	<button onclick="$.get('/lamp', {lamp:3, state:'off'}, success=success)">Lamp 3 off</button><br>
-    <button onclick="$.get('/lamp', {lamp:'all', state:'on'}, success=success)">All lamps on</button>
-	<button onclick="$.get('/lamp', {lamp:'all', state:'off'}, success=success)">All lamps off</button><br>
-	<div id="response"></div>
-</body>
-<footer>
+	<h1>NEXA lamp control</h1>
+	<div class="row">
+		<div class="col-sm-2 text-center bg-white">Lamp 1</div>
+		<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:1, state:'on'}, success=success)">on</button>
+		<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:1, state:'off'}, success=success)">off</button>
+	</div>
+	<div class="row">
+		<div class="col-sm-2 text-center bg-white">Lamp 2</div>
+    	<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:2, state:'on'}, success=success)">on</button>
+		<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:2, state:'off'}, success=success)">off</button>
+	</div>
+	<div class="row">
+		<div class="col-sm-2 text-center bg-white">Lamp 3</div>
+    	<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:3, state:'on'}, success=success)">on</button>
+		<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:3, state:'off'}, success=success)">off</button>
+	</div>
+	<div class="row">
+		<div class="col-sm-2 text-center bg-white">All lamps</div>
+    	<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:'all', state:'on'}, success=success)">on</button>
+		<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:'all', state:'off'}, success=success)">off</button>
+	</div>
+	<div class="row">
+		<p class="col text-center text-info p-3" id="response">Response text</p>
+	</div>
 	<script>
 		function success(data, textStatus, jqXHR) {
 			let r = document.getElementById("response");
 			r.innerHTML = JSON.stringify(data);
 		}
 	</script>
-</footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
