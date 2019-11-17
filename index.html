@@ -1,0 +1,22 @@
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <button onclick="$.get('/lamp', {lamp:1, state:'on'}, success=success)">Lamp 1 on</button>
+	<button onclick="$.get('/lamp', {lamp:1, state:'off'}, success=success)">Lamp 1 off</button><br>
+    <button onclick="$.get('/lamp', {lamp:2, state:'on'}, success=success)">Lamp 2 on</button>
+	<button onclick="$.get('/lamp', {lamp:2, state:'off'}, success=success)">Lamp 2 off</button><br>
+    <button onclick="$.get('/lamp', {lamp:3, state:'on'}, success=success)">Lamp 3 on</button>
+	<button onclick="$.get('/lamp', {lamp:3, state:'off'}, success=success)">Lamp 3 off</button><br>
+    <button onclick="$.get('/lamp', {lamp:'all', state:'on'}, success=success)">All lamps on</button>
+	<button onclick="$.get('/lamp', {lamp:'all', state:'off'}, success=success)">All lamps off</button><br>
+	<div id="response"></div>
+</body>
+<footer>
+	<script>
+		function success(data, textStatus, jqXHR) {
+			let r = document.getElementById("response");
+			r.innerHTML = JSON.stringify(data);
+		}
+	</script>
+</footer>

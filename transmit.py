@@ -3,6 +3,7 @@
 import serial
 import sys
 import time
+from threading import RLock
 
 
 class TimeoutOverride:
@@ -19,6 +20,7 @@ class TimeoutOverride:
 
 class NEXA_UART(object):
     prompt = ">> "
+    serial_lock = RLock()
 
     def __init__(self, port):
         self.s = serial.Serial(port, baudrate=115200)
@@ -37,7 +39,7 @@ class NEXA_UART(object):
         self.device = self.send_command("?")
 
     def send_command(self, command, timeout_override=None, encoding="utf-8"):
-        with TimeoutOverride(self.s, timeout_override):
+        with TimeoutOverride(self.s, timeout_override), self.serial_lock:
             self.s.reset_input_buffer()
 
             if not command.endswith("\n"):
