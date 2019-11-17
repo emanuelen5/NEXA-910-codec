@@ -1,3 +1,5 @@
 README.html
 doc/radio_symbol.svg
 build-*/
+*.swp
+__pycache__
