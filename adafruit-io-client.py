@@ -1,8 +1,14 @@
 #! /usr/bin/env python3
 
 import os
-ADAFRUIT_IO_USERNAME = os.environ["ADAFRUIT_IO_USERNAME"]
-ADAFRUIT_IO_KEY = os.environ["ADAFRUIT_IO_KEY"]
+def get_env(env_name):
+    if env_name in os.environ:
+        return os.environ[env_name]
+    else:
+        raise KeyError(f"The environment variable {env_name} has not been set")
+
+ADAFRUIT_IO_USERNAME = get_env("ADAFRUIT_IO_USERNAME")
+ADAFRUIT_IO_KEY = get_env("ADAFRUIT_IO_KEY")
 
 from argparse import ArgumentParser
 args = ArgumentParser()
