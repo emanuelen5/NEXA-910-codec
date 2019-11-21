@@ -1,23 +1,23 @@
 #! /usr/bin/env python3
 
-from Adafruit_IO import Client, MQTTClient
-import os, sys
+import os
+import sys
 from argparse import ArgumentParser
+from Adafruit_IO import Client, MQTTClient
 # For sending on/off commands to server
 import requests
 
 def get_env(env_name):
     if env_name in os.environ:
         return os.environ[env_name]
-    else:
-        raise KeyError(f"The environment variable {env_name} has not been set")
+    raise KeyError(f"The environment variable {env_name} has not been set")
 
 ADAFRUIT_IO_USERNAME = get_env("ADAFRUIT_IO_USERNAME")
 ADAFRUIT_IO_KEY = get_env("ADAFRUIT_IO_KEY")
 
 def get_on_message(url):
     def on_message(client, feed_id, payload):
-        r = requests.get(url = url, params = dict(lamp=payload, state=""))
+        r = requests.get(url=url, params=dict(lamp=payload, state=""))
         print(r.json())
     return on_message
 
@@ -52,5 +52,5 @@ def main():
     client.subscribe(FEED_NAME)
     client.loop_blocking()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
