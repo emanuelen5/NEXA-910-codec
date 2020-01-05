@@ -2,7 +2,7 @@ from transmit import NEXA_UART
 from flask import Flask, request, abort
 app = Flask(__name__)
 
-nexa_uart = NEXA_UART(port="/dev/ttyACM0")
+nexa_uart = NEXA_UART.get_connected()[0]
 
 @app.route('/')
 def index_route():
