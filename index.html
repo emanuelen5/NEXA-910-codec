@@ -13,28 +13,30 @@
 </head>
 <body>
 	<h1>NEXA lamp control</h1>
-	<div class="row">
-		<div class="col-sm-2 text-center bg-white">Lamp 1</div>
-		<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:1, state:'on'}, success=success)">on</button>
-		<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:1, state:'off'}, success=success)">off</button>
-	</div>
-	<div class="row">
-		<div class="col-sm-2 text-center bg-white">Lamp 2</div>
-    	<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:2, state:'on'}, success=success)">on</button>
-		<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:2, state:'off'}, success=success)">off</button>
-	</div>
-	<div class="row">
-		<div class="col-sm-2 text-center bg-white">Lamp 3</div>
-    	<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:3, state:'on'}, success=success)">on</button>
-		<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:3, state:'off'}, success=success)">off</button>
-	</div>
-	<div class="row">
-		<div class="col-sm-2 text-center bg-white">All lamps</div>
-    	<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:'all', state:'on'}, success=success)">on</button>
-		<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:'all', state:'off'}, success=success)">off</button>
-	</div>
-	<div class="row">
-		<p class="col text-center text-info p-3" id="response">Response text</p>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2 text-center bg-white">Lamp 1</div>
+			<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:1, state:'on'}, success=success)">on</button>
+			<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:1, state:'off'}, success=success)">off</button>
+		</div>
+		<div class="row">
+			<div class="col-sm-2 text-center bg-white">Lamp 2</div>
+			<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:2, state:'on'}, success=success)">on</button>
+			<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:2, state:'off'}, success=success)">off</button>
+		</div>
+		<div class="row">
+			<div class="col-sm-2 text-center bg-white">Lamp 3</div>
+			<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:3, state:'on'}, success=success)">on</button>
+			<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:3, state:'off'}, success=success)">off</button>
+		</div>
+		<div class="row">
+			<div class="col-sm-2 text-center bg-white">All lamps</div>
+			<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:'all', state:'on'}, success=success)">on</button>
+			<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:'all', state:'off'}, success=success)">off</button>
+		</div>
+		<div class="row">
+			<p class="col text-center text-info p-3" id="response">Response text</p>
+		</div>
 	</div>
 	<script>
 		function success(data, textStatus, jqXHR) {
