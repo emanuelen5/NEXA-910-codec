@@ -3,3 +3,4 @@ doc/radio_symbol.svg
 build-*/
 *.swp
 __pycache__
+.idea
