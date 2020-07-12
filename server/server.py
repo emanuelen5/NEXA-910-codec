@@ -9,7 +9,7 @@ from flask import Flask, request, abort, jsonify, redirect
 from werkzeug.exceptions import HTTPException
 from pathlib import Path
 
-static_path = str(Path(__file__).parent / "static")
+static_path = str(Path(__file__).parent / ".build")
 app = Flask(__name__, static_url_path='', static_folder=static_path)
 
 
