@@ -1,11 +1,8 @@
 {
   "name": "NEXA-910-codec",
   "version": "1.0.0",
-  "description": "[![Build Status](https://travis-ci.org/emanuelen5/NEXA-910-codec.svg?branch=master)](https://travis-ci.org/emanuelen5/NEXA-910-codec) # NEXA PET-910 codec",
+  "description": "Web server for talking to Arduino that controls NEXA lamps over 433 MHz radio",
   "main": "index.js",
-  "directories": {
-    "doc": "doc"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,8 +11,8 @@
     "url": "git+https://github.com/emanuelen5/NEXA-910-codec.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Erasmus Cedernaes",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/emanuelen5/NEXA-910-codec/issues"
   },
