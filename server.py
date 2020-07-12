@@ -2,7 +2,12 @@ from transmit import NEXA_UART
 from flask import Flask, request, abort
 app = Flask(__name__)
 
-nexa_uart = NEXA_UART.get_connected()[0]
+class Globals:
+	pass
+
+@app.before_first_request
+def init():
+	Globals.nexa_uart = NEXA_UART.get_connected()[0]
 
 @app.route('/')
 def index_route():
@@ -22,6 +27,6 @@ def lamp_route():
     lamp = get_arg("lamp")
     state = get_arg("state")
     command = " ".join([lamp, state]).strip()
-    response = nexa_uart.send_command(command)
+    response = Globals.nexa_uart.send_command(command)
     print(response)
     return dict(OK=True, response=response)
