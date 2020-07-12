@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   entry: './client/index.js',
   module: {
@@ -6,6 +8,11 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        use: ['raw-loader']
       },
     ]
   },
@@ -19,5 +26,12 @@ module.exports = {
   },
   devServer: {
     contentBase: './.build'
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Website main entry point',
+      // Load a custom template (lodash by default)
+      template: './client/index.html'
+    })
+  ],
 };

@@ -9,9 +9,9 @@ serve-watch:
 
 # Client code (JS etc.)
 webpack-watch:
-	npx webpack --watch
+	npx webpack --watch --mode development
 webpack-build:
-	npx webpack
+	npx webpack --mode production
 # Reload of client code
 livereload:
 	livereload --host 0.0.0.0 -t ./static
