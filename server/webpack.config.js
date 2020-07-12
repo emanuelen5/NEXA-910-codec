@@ -33,10 +33,16 @@ module.exports = {
   devServer: {
     contentBase: './.build'
   },
+  externals: {
+    jquery: 'jQuery',
+    bootstrap: 'bootstrap',
+  },
   plugins: [
 	new CopyWebpackPlugin({
 	  patterns: [
 		{ from: 'node_modules/bootstrap/dist/css', to: 'css/'},
+		{ from: 'node_modules/bootstrap/dist/js/', to: 'js/'},
+		{ from: 'node_modules/jquery/dist/', to: 'js/'},
 	  ],
     }),
     new HtmlWebpackPlugin({
@@ -45,7 +51,11 @@ module.exports = {
       template: './client/index.html'
     }),
 	new HtmlWebpackTagsPlugin({
-      links: ['css/bootstrap.min.css']
+      links: ['css/bootstrap.min.css'],
+	}),
+	new HtmlWebpackTagsPlugin({
+	  append: false,
+	  scripts: ['js/jquery.min.js', 'js/bootstrap.bundle.min.js'],
     }),
   ],
 };
