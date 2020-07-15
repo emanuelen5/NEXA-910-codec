@@ -16,7 +16,10 @@ webpack-build:
 livereload:
 	livereload --host 0.0.0.0 -t ./static
 
+clean:
+	rm -rf .build node_modules
+
 # pytest-watch:
 # 	PYTHONPATH="src" pytest-watch
 
-.PHONY: serve livereload develop watch build
+.PHONY: serve livereload develop watch build clean
