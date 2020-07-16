@@ -18,7 +18,7 @@ class Lamp extends Component {
     command(on_off_n) {
         $.get("/lamp", {lamp:this.props.index, state:on_off_n?"on":"off"})
         .then((data) => {
-            console.log("Got data: " + JSON.stringify(data));
+            this.props.on_response(data);
         });
     }
 
@@ -33,16 +33,40 @@ class Lamp extends Component {
     }
 };
 
+class LampResult extends Component {
+    render() {
+        const responseText = this.props.has_response ? "Response: " + JSON.stringify(this.props.response) : "Ready";
+        return (
+            <div className="row">
+                <div className="col text-info text-center">
+                    {responseText}
+                </div>
+            </div>
+        );
+    }
+}
+
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.response = this.response.bind(this);
+        this.state = {has_response: false, response: "Ready"};
+    }
+
+    response(data) {
+        this.setState({response: data, has_response: true});
+    }
+
 	render() {
 		return (
             <>
-			<div>REACT stuffs</div>
             <LampCollection>
-                <Lamp index={1} name="1"/>
-                <Lamp index={2} name="2"/>
-                <Lamp index={3} name="3"/>
-                <Lamp index="all" name="group"/>
+			    <h1>NEXA control page</h1>
+                <Lamp index={1} on_response={this.response} name="1"/>
+                <Lamp index={2} on_response={this.response} name="2"/>
+                <Lamp index={3} on_response={this.response} name="3"/>
+                <Lamp index="all" on_response={this.response} name="group"/>
+                <LampResult has_response={this.state.has_response} response={this.state.response}/>
             </LampCollection>
             </>
 		);
