@@ -25,7 +25,7 @@ class Lamp extends Component {
     render() {
         return (
             <div className="row">
-                <div className="col-sm-2 text-center">Lamp {this.props.name}</div>
+                <div className="col-sm-2">Lamp {this.props.name}</div>
                 <div className="col btn btn-light w-50" onClick={() => this.command(true)}>ON</div>
                 <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>OFF</div>
             </div>
@@ -61,7 +61,7 @@ class App extends Component {
 		return (
             <>
             <LampCollection>
-			    <h1>NEXA control page</h1>
+			    <h1 className="display-4 text-center">NEXA control page</h1>
                 <Lamp index={1} on_response={this.response} name="1"/>
                 <Lamp index={2} on_response={this.response} name="2"/>
                 <Lamp index={3} on_response={this.response} name="3"/>

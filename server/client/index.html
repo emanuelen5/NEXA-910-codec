@@ -2,44 +2,12 @@
 <html>
 <head lang="en">
     <!-- Required meta tags -->
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>NEXA lamp control page</title>
 </head>
 <body>
-	<div id="app">NOT REACT STUFFS</div>
-	<h1>NEXA lamp control</h1>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-2 text-center bg-white">Lamp 1</div>
-			<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:1, state:'on'}, success=success)">on</button>
-			<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:1, state:'off'}, success=success)">off</button>
-		</div>
-		<div class="row">
-			<div class="col-sm-2 text-center bg-white">Lamp 2</div>
-			<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:2, state:'on'}, success=success)">on</button>
-			<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:2, state:'off'}, success=success)">off</button>
-		</div>
-		<div class="row">
-			<div class="col-sm-2 text-center bg-white">Lamp 3</div>
-			<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:3, state:'on'}, success=success)">on</button>
-			<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:3, state:'off'}, success=success)">off</button>
-		</div>
-		<div class="row">
-			<div class="col-sm-2 text-center bg-white">All lamps</div>
-			<button type="button" class="btn col w-50 btn-light" onclick="$.get('/lamp', {lamp:'all', state:'on'}, success=success)">on</button>
-			<button type="button" class="btn col w-50 btn-dark" onclick="$.get('/lamp', {lamp:'all', state:'off'}, success=success)">off</button>
-		</div>
-		<div class="row">
-			<p class="col text-center text-info p-3" id="response">Response text</p>
-		</div>
-	</div>
-	<script>
-		function success(data, textStatus, jqXHR) {
-			let r = document.getElementById("response");
-			r.innerHTML = JSON.stringify(data);
-		}
-	</script>
+    <div id="app">NOT REACT STUFFS</div>
 </body>
 </html>
