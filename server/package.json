@@ -1,0 +1,42 @@
+{
+  "name": "NEXA-910-codec",
+  "version": "1.0.0",
+  "description": "Web server for talking to Arduino that controls NEXA lamps over 433 MHz radio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emanuelen5/NEXA-910-codec.git"
+  },
+  "keywords": [],
+  "author": "Erasmus Cedernaes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emanuelen5/NEXA-910-codec/issues"
+  },
+  "homepage": "https://github.com/emanuelen5/NEXA-910-codec#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "css-loader": "^3.6.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "html-webpack-tags-plugin": "^2.0.17",
+    "raw-loader": "^4.0.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
