@@ -42,7 +42,7 @@ class App extends Component {
                 <Lamp index={1} name="1"/>
                 <Lamp index={2} name="2"/>
                 <Lamp index={3} name="3"/>
-                <Lamp index="All" name="group"/>
+                <Lamp index="all" name="group"/>
             </LampCollection>
             </>
 		);
