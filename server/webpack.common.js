@@ -4,8 +4,6 @@ const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 module.exports = {
   entry: './client/index.js',
-  mode: "development",
-  devtool: "eval-source-map",
   module: {
     rules: [
       {
@@ -40,24 +38,24 @@ module.exports = {
     bootstrap: 'bootstrap',
   },
   plugins: [
-	new CopyWebpackPlugin({
-	  patterns: [
-		{ from: 'node_modules/bootstrap/dist/css', to: 'css/'},
-		{ from: 'node_modules/bootstrap/dist/js/', to: 'js/'},
-		{ from: 'node_modules/jquery/dist/', to: 'js/'},
-	  ],
+    new CopyWebpackPlugin({
+      patterns: [
+    	{ from: 'node_modules/bootstrap/dist/css/*.min.*', to: 'css/'},
+    	{ from: 'node_modules/bootstrap/dist/js/*.min.*', to: 'js/'},
+    	{ from: 'node_modules/jquery/dist/*.min.*', to: 'js/'},
+      ],
     }),
     new HtmlWebpackPlugin({
       title: 'Website main entry point',
       // Load a custom template (lodash by default)
       template: './client/index.html'
     }),
-	new HtmlWebpackTagsPlugin({
+    new HtmlWebpackTagsPlugin({
       links: ['css/bootstrap.min.css'],
-	}),
-	new HtmlWebpackTagsPlugin({
-	  append: false,
-	  scripts: ['js/jquery.min.js', 'js/bootstrap.bundle.min.js'],
+    }),
+    new HtmlWebpackTagsPlugin({
+      append: false,
+      scripts: ['js/jquery.min.js', 'js/bootstrap.bundle.min.js'],
     }),
   ],
 };
