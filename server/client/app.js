@@ -50,7 +50,11 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.response = this.response.bind(this);
-        this.state = {has_response: false, response: "Ready"};
+        this.state = {
+            has_response: false,
+            response: "Ready",
+            switches: props.switches || []
+        };
     }
 
     response(data) {
@@ -58,14 +62,16 @@ class App extends Component {
     }
 
 	render() {
+        let lamps = this.state.switches.value.map(s => {
+            const key = s.name + " " + s.group;
+            const name = s.name == 'all' ? 'group' : s.name;
+            return <Lamp index={s.name} name={name} on_response={this.response} key={key}></Lamp>;
+        });
 		return (
             <>
             <LampCollection>
 			    <h1 className="display-4 text-center">NEXA control page</h1>
-                <Lamp index={1} on_response={this.response} name="1"/>
-                <Lamp index={2} on_response={this.response} name="2"/>
-                <Lamp index={3} on_response={this.response} name="3"/>
-                <Lamp index="all" on_response={this.response} name="group"/>
+                {lamps}
                 <LampResult has_response={this.state.has_response} response={this.state.response}/>
             </LampCollection>
             </>
