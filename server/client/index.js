@@ -15,14 +15,21 @@ class StorageItem {
         this.storage = window.localStorage;
         this.name = name;
         this.value = StorageItem.load(this.storage, name, def);
+        this.def = def;
+        this.save();
     };
 
     save() {
-        this.localStorage.setItem(this.name, this.as_string());
+        this.storage.setItem(this.name, this.as_string());
     };
 
     get(name) {
         return this.value[name];
+    };
+
+    reset() {
+        this.value = this.def;
+        this.save();
     };
 
     set(name, value) {
