@@ -47,6 +47,8 @@ module.exports = {
                 { from: 'node_modules/bootstrap/dist/css/bootstrap.min.*', to: 'css/[name].[ext]'},
                 { from: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.*', to: 'js/[name].[ext]'},
                 { from: 'node_modules/jquery/dist/jquery.min.*', to: 'js/[name].[ext]'},
+                { from: 'node_modules/font-awesome/css/font-awesome.min.*', to: 'css/[name].[ext]'},
+                { from: 'node_modules/font-awesome/fonts/*.woff2', to: 'fonts/[name].[ext]'},
             ],
         }),
         new HtmlWebpackPlugin({
@@ -55,7 +57,7 @@ module.exports = {
             template: './client/index.html'
         }),
         new HtmlWebpackTagsPlugin({
-            links: ['css/bootstrap.min.css'],
+            links: ['css/bootstrap.min.css', 'css/font-awesome.min.css'],
         }),
         new HtmlWebpackTagsPlugin({
             append: false,

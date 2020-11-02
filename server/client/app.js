@@ -28,6 +28,9 @@ class Lamp extends Component {
                 <div className="col-sm-2">Lamp {this.props.name}</div>
                 <div className="col btn btn-light w-50" onClick={() => this.command(true)}>ON</div>
                 <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>OFF</div>
+                {this.props.editable &&
+                    <div className="col btn bg-danger text-white col-sm-1"><i className="fa fa-trash"></i></div>
+                }
             </div>
         );
     }
@@ -51,10 +54,16 @@ class App extends Component {
         super(props);
         this.response = this.response.bind(this);
         this.state = {
+            editable: false,
             has_response: false,
             response: "Ready",
             switches: props.switches || []
         };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({editable: event.target.checked});
     }
 
     response(data) {
@@ -65,10 +74,11 @@ class App extends Component {
         let lamps = this.state.switches.value.map(s => {
             const key = s.name + " " + s.group;
             const name = s.name == 'all' ? 'group' : s.name;
-            return <Lamp index={s.name} name={name} on_response={this.response} key={key}></Lamp>;
+            return <Lamp index={s.name} name={name} on_response={this.response} key={key} editable={this.state.editable}></Lamp>;
         });
 		return (
             <>
+            <input type="checkbox" value={this.state.value} onChange={this.handleChange} />
             <LampCollection>
 			    <h1 className="display-4 text-center">NEXA control page</h1>
                 {lamps}

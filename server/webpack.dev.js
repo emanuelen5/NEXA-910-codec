@@ -10,7 +10,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new webpack.EvalSourceMapDevToolPlugin({
-            filename: '[name].js.map',
+            filename: '[name].[ext].map',
             exclude: [
                 /node_modules/
             ]
