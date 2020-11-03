@@ -50,12 +50,9 @@ def root():
 
 @app.before_first_request
 def init():
-    if Globals.uart_lock.acquire(timeout=0):
-        print("No UART set!")
+    if Globals.nexa_uart is None and Globals.uart_lock.acquire(timeout=0):
         Globals.nexa_uart = NEXA_UART.get_connected()[0]
         Globals.uart_lock.release()
-    else:
-        print("UART is already set")
 
 
 def get_arg(arg_name):

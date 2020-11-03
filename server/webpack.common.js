@@ -24,6 +24,11 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
+            {
+                test: /static\/.*$/,
+                exclude: /node_modules/,
+                use: ['raw-loader']
+            },
         ]
     },
     resolve: {
@@ -49,6 +54,7 @@ module.exports = {
                 { from: 'node_modules/jquery/dist/jquery.min.*', to: 'js/[name].[ext]'},
                 { from: 'node_modules/font-awesome/css/font-awesome.{css.map,min.css}', to: 'css/[name].[ext]'},
                 { from: 'node_modules/font-awesome/fonts/*.woff2', to: 'fonts/[name].[ext]'},
+                { from: 'static/*', to: '[name].[ext]'},
             ],
         }),
         new HtmlWebpackPlugin({
