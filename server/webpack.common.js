@@ -47,6 +47,10 @@ module.exports = {
         bootstrap: 'bootstrap',
     },
     plugins: [
+        new webpack.ProgressPlugin(),
+        new CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: ['!index.html'],
+        }),
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css{,.map}', to: 'css/[name].[ext]'},
@@ -68,10 +72,6 @@ module.exports = {
         new HtmlWebpackTagsPlugin({
             append: false,
             scripts: ['js/jquery.min.js', 'js/bootstrap.bundle.min.js'],
-        }),
-        new webpack.ProgressPlugin(),
-        new CleanWebpackPlugin({
-            cleanAfterEveryBuildPatterns: ['!index.html'],
         }),
     ],
 };

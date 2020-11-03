@@ -9,5 +9,13 @@
 </head>
 <body>
     <div id="app">NOT REACT STUFFS</div>
+    
+    <script>
+        console.log("Script reloader");
+        const el = document.createElement("script");
+        el.setAttribute("src", 'http://' + (location.host || 'localhost').split(':')[0] +
+        ':35729/livereload.js?snipver=2');
+        document.body.append(el);
+    </script>
 </body>
 </html>

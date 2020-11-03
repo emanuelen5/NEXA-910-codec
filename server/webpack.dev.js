@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
@@ -20,10 +21,6 @@ module.exports = merge(common, {
             exclude: [
                 /node_modules/
             ]
-        }),
-        new HtmlWebpackTagsPlugin({
-            append: false,
-            scripts: ['livereload.js'],
         }),
     ],
 });
