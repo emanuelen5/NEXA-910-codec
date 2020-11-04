@@ -51,6 +51,7 @@ module.exports = (env, is_dev) => {
         plugins: [
             new webpack.ProgressPlugin(),
             new CleanWebpackPlugin({
+                verbose: true,
                 cleanAfterEveryBuildPatterns: ['!index.html'],
             }),
             new CopyWebpackPlugin({
