@@ -4,8 +4,6 @@ const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-console.log('Running webpack common.js');
-
 module.exports = (env, is_dev) => {
 
     return {
