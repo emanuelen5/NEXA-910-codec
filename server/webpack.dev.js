@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const { merge } = require('webpack-merge');
@@ -11,16 +12,11 @@ module.exports = merge(common, {
         contentBase: './.build',
     },
     plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: 'livereload.js', to: '[name].[ext]'},
-            ],
-        }),
-        new webpack.EvalSourceMapDevToolPlugin({
-            filename: '[name].[ext].map',
-            exclude: [
-                /node_modules/
-            ]
+        new HtmlWebpackPlugin({
+            title: 'Website main entry point',
+            // Load a custom template (lodash by default)
+            template: './client/index.html',
+            
         }),
     ],
 });

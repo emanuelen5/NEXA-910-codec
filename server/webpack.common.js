@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -60,11 +59,6 @@ module.exports = {
                 { from: 'node_modules/font-awesome/fonts/*.woff2', to: 'fonts/[name].[ext]'},
                 { from: 'static/*', to: '[name].[ext]'},
             ],
-        }),
-        new HtmlWebpackPlugin({
-            title: 'Website main entry point',
-            // Load a custom template (lodash by default)
-            template: './client/index.html'
         }),
         new HtmlWebpackTagsPlugin({
             links: ['css/bootstrap.min.css', 'css/font-awesome.min.css'],

@@ -14,7 +14,7 @@ webpack-build:
 	npx webpack --config webpack.prod.js
 # Reload of client code
 livereload:
-	livereload --host 0.0.0.0 -t ./static
+	npx livereloadx .build
 
 clean:
 	rm -rf .build node_modules
