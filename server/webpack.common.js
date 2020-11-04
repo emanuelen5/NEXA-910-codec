@@ -68,7 +68,7 @@ module.exports = (env, is_dev) => {
             new HtmlWebpackPlugin({
                 title: 'Website main entry point',
                 // Load a custom template (lodash by default)
-                template: './client/index.html',
+                template: './client/index.ejs',
                 templateParameters: {
                     is_dev: is_dev
                 }

@@ -10,6 +10,7 @@
 <body>
     <div id="app">NOT REACT STUFFS</div>
     
+    <% if (is_dev) { %>
     <script>
         console.log("Injecting livereloader!")
         const el = document.createElement("script");
@@ -17,5 +18,6 @@
         ':35729/livereload.js?snipver=2');
         document.body.append(el);
     </script>
+    <% } %>
 </body>
 </html>
