@@ -1,12 +1,23 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
+const path = require('path');
 
 module.exports = merge(common, {
     mode: "development",
     devtool: false,
     devServer: {
-        contentBase: './.build',
+        host: "0.0.0.0",
+        port: 5000,
+        // public: 'http://localhost:5000',
+        static: {
+        	directory: path.join(__dirname, './.build'),
+        	publicPath: '/',
+        },
+        proxy: {
+            '/api': 'http://localhost:5001',
+            pathRewrite: { '^/api': '' },
+        }
     },
     plugins: [
         new webpack.EvalSourceMapDevToolPlugin({

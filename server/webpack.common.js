@@ -34,9 +34,6 @@ module.exports = {
         publicPath: '/',
         filename: '[name].js'
     },
-    devServer: {
-        contentBase: './.build'
-    },
     externals: {
         jquery: 'jQuery',
         bootstrap: 'bootstrap',
