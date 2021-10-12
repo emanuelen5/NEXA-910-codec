@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-import serial, serial.tools.list_ports
+import serial
+import serial.tools.list_ports
 import sys
 import time
 import re
@@ -19,10 +20,12 @@ class TimeoutOverride:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.s.timeout = self.old_timeout
 
+
 class NEXA_UART_Init_Failed(TypeError):
     pass
 
-class NEXA_UART(object):
+
+class NEXA_UART:
     prompt = ">> "
     device_pattern = r'\bNEXA 910\b'
 
@@ -67,10 +70,10 @@ class NEXA_UART(object):
             response = response.rstrip()
         return response
 
-    def send_command_read_response(nexa_uart, command, timeout_override=0.1, print_com=True):
+    def send_command_read_response(self, command, timeout_override=0.1, print_com=True):
         if print_com:
-            print(f"{nexa_uart.prompt}{command}")
-        response = nexa_uart.send_command(command, timeout_override=timeout_override)
+            print(f"{self.prompt}{command}")
+        response = self.send_command(command, timeout_override=timeout_override)
         if print_com:
             print(f"{response}")
 
@@ -86,6 +89,7 @@ class NEXA_UART(object):
                 pass
         return ports
 
+
 def main():
     nexa_uart = NEXA_UART.get_connected()[0]
 
@@ -96,8 +100,8 @@ def main():
 
     # Take command from input arguments
     command = " ".join(sys.argv[1:])
-    response = nexa_uart.send_command_read_response(command, timeout_override=2)
+    nexa_uart.send_command_read_response(command, timeout_override=2)
+
 
 if __name__ == "__main__":
     main()
-

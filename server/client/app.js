@@ -16,7 +16,7 @@ class Lamp extends Component {
     }
 
     command(on_off_n) {
-        $.get("/lamp", {lamp:this.props.index, state:on_off_n?"on":"off"})
+        $.get("/api/lamp", {lamp:this.props.index, state:on_off_n?"on":"off"})
         .then((data) => {
             this.props.on_response(data);
         });

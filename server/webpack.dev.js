@@ -16,7 +16,6 @@ module.exports = merge(common, {
         },
         proxy: {
             '/api': 'http://localhost:5001',
-            pathRewrite: { '^/api': '' },
         }
     },
     plugins: [
