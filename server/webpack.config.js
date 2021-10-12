@@ -32,9 +32,6 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  devServer: {
-    contentBase: './.build'
-  },
   externals: {
     jquery: 'jQuery',
     bootstrap: 'bootstrap',

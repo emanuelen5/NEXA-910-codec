@@ -29,7 +29,7 @@ class Lamp extends Component {
                 <div className="col btn btn-light w-50" onClick={() => this.command(true)}>ON</div>
                 <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>OFF</div>
                 {this.props.editable &&
-                    <div className="col btn bg-danger text-white col-sm-1"><i className="fa fa-trash"></i></div>
+                    <div className="col btn btn-danger text-white col-sm-1"><i className="fa fa-trash"></i></div>
                 }
             </div>
         );
@@ -47,6 +47,10 @@ class LampResult extends Component {
             </div>
         );
     }
+}
+
+function EditMenu(props) {
+    return <input type="checkbox" value={props.value} onChange={props.onChange}/>;
 }
 
 class App extends Component {
@@ -78,9 +82,11 @@ class App extends Component {
         });
 		return (
             <>
-            <input type="checkbox" value={this.state.value} onChange={this.handleChange} />
             <LampCollection>
-			    <h1 className="display-4 text-center">NEXA control page</h1>
+			    <h1 className="display-4 text-center">
+                    NEXA control page
+                    <EditMenu value={this.state.editable} onChange={this.handleChange}/>
+                </h1>
                 {lamps}
                 <LampResult has_response={this.state.has_response} response={this.state.response}/>
             </LampCollection>

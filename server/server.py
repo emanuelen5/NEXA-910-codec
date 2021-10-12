@@ -1,6 +1,7 @@
 import traceback
 from logging import getLogger
 from enum import Enum
+from threading import Lock
 
 logger = getLogger(__name__)
 
@@ -34,7 +35,12 @@ class ENDPOINTS(str, Enum):
 
 
 class Globals:
-    pass
+    nexa_uart = None
+    uart_lock = Lock()
+
+if Globals.uart_lock.acquire(timeout=0):
+    Globals.nexa_uart = NEXA_UART.get_connected()[0]
+    Globals.uart_lock.release()
 
 
 @app.route(ENDPOINTS.ROOT)
@@ -44,7 +50,9 @@ def root():
 
 @app.before_first_request
 def init():
-    Globals.nexa_uart = NEXA_UART.get_connected()[0]
+    if Globals.nexa_uart is None and Globals.uart_lock.acquire(timeout=0):
+        Globals.nexa_uart = NEXA_UART.get_connected()[0]
+        Globals.uart_lock.release()
 
 
 def get_arg(arg_name):
