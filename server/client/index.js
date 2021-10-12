@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import 'bootstrap';
 import 'jquery';
 
-require('./index.html');
 import App from './app';
 
 const STORAGE_CONFIG = 'config';
