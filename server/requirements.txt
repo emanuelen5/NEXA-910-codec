@@ -2,3 +2,4 @@ flask
 adafruit-io
 pyserial
 gunicorn
+python-dotenv

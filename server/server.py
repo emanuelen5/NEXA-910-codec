@@ -1,8 +1,11 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 import traceback
 from logging import getLogger
 from enum import Enum
 from threading import Lock
-from nexa.transmit import NEXA_UART, NEXA_UART_Init_Failed
+from nexa import NEXA_UART, NEXA_UART_Init_Failed
 from flask import Flask, request, abort, jsonify, redirect
 from werkzeug.exceptions import HTTPException
 from pathlib import Path
