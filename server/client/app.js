@@ -50,7 +50,14 @@ class LampResult extends Component {
 }
 
 function EditMenu(props) {
-    return <input type="checkbox" value={props.value} onChange={props.onChange}/>;
+    return (
+        <>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="edit_enable_checkbox" value="editable" value={props.value} onChange={props.onChange}/>
+            <label class="form-check-label" for="edit_enable_checkbox">Enable edit</label>
+        </div>
+        </>
+    )
 }
 
 class App extends Component {
@@ -85,8 +92,8 @@ class App extends Component {
             <LampCollection>
 			    <h1 className="display-4 text-center">
                     NEXA control page
-                    <EditMenu value={this.state.editable} onChange={this.handleChange}/>
                 </h1>
+                <EditMenu value={this.state.editable} onChange={this.handleChange}/>
                 {lamps}
                 <LampResult has_response={this.state.has_response} response={this.state.response}/>
             </LampCollection>

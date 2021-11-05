@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = merge(common, {
     mode: "development",
-    devtool: false,
+    devtool: "eval",
     devServer: {
         host: "0.0.0.0",
         port: 5000,
