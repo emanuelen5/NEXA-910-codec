@@ -7,7 +7,6 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         main: './client/index.js',
-        theme: "./static/theme.scss",
     },
     module: {
         rules: [
@@ -79,7 +78,7 @@ module.exports = {
             template: './client/index.html'
         }),
         new HtmlWebpackTagsPlugin({
-            links: ['css/font-awesome.min.css', './static/theme.css'],
+            links: ['css/font-awesome.min.css'],
         }),
         new HtmlWebpackTagsPlugin({
             append: false,

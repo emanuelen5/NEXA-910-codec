@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import 'jquery';
 import './bootstrap.scss';
 import "@mdi/font/css/materialdesignicons.css";
+import "/static/theme.scss"
 
 import App from './app';
 
