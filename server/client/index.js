@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'bootstrap';
 import 'jquery';
+import './bootstrap.scss'
 
 import App from './app';
 

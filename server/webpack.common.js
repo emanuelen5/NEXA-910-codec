@@ -6,7 +6,7 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: {
-            main: './client/index.js',
+        main: './client/index.js',
     },
     module: {
         rules: [
@@ -23,6 +23,18 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(scss)$/,
+                use: [{
+                    loader: 'style-loader', // inject CSS to page
+                }, {
+                    loader: 'css-loader', // translates CSS into CommonJS modules
+                }, {
+                    loader: 'postcss-loader', // Run post css actions
+                }, {
+                    loader: 'sass-loader' // compiles Sass to CSS
+                }]
             },
         ]
     },
@@ -41,11 +53,11 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css{,.map}', to: 'css/[name].[ext]'},
-                { from: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js{,.map}', to: 'js/[name].[ext]'},
-                { from: 'node_modules/jquery/dist/jquery.min.*', to: 'js/[name].[ext]'},
-                { from: 'node_modules/font-awesome/css/font-awesome.{css.map,min.css}', to: 'css/[name].[ext]'},
-                { from: 'node_modules/font-awesome/fonts/*.woff2', to: 'fonts/[name].[ext]'},
+                { from: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js{,.map}', to: 'js/[name].[ext]' },
+                { from: 'node_modules/jquery/dist/jquery.min.*', to: 'js/[name].[ext]' },
+                { from: 'node_modules/font-awesome/css/font-awesome.{css.map,min.css}', to: 'css/[name].[ext]' },
+                { from: 'node_modules/font-awesome/fonts/*.woff2', to: 'fonts/[name].[ext]' },
+                { from: './static/*', to: 'static/[name].[ext]' },
             ],
         }),
         new HtmlWebpackPlugin({
@@ -54,7 +66,7 @@ module.exports = {
             template: './client/index.html'
         }),
         new HtmlWebpackTagsPlugin({
-            links: ['css/bootstrap.min.css', 'css/font-awesome.min.css'],
+            links: ['css/font-awesome.min.css', './static/theme.css'],
         }),
         new HtmlWebpackTagsPlugin({
             append: false,
