@@ -24,7 +24,8 @@ class Lamp extends Component {
 
     render() {
         const icon =  this.props.is_group ? {on: "mdi-lightbulb-group", off: "mdi-lightbulb-group-off"} : {on: "mdi-lightbulb-on", off: "mdi-lightbulb-off"};
-        return (
+        const name = this.props.is_group ? 'group' : this.props.lampstate.name;
+        return (<>
             <div className="row">
                 <div className="col-sm-2">Lamp {this.props.name}</div>
                 <div className="col btn btn-light w-50" onClick={() => this.command(true)}>
@@ -35,11 +36,17 @@ class Lamp extends Component {
                     <i className={`mdi ${icon['off']}`} aria-hidden="true"></i>
                     OFF
                 </div>
-                {this.props.editable &&
-                    <div className="col btn btn-danger text-white col-sm-1" onClick={this.props.on_delete}><i className="fa fa-trash"></i></div>
-                }
             </div>
-        );
+            {this.props.editable && <>
+                <div className="row">
+                    <span className="col-sm-2"></span>
+                    <input type="text" className="col" value={this.props.lampstate.name}></input>
+                    <input type="text" className="col" value={this.props.lampstate.group}></input>
+                    <input type="checkbox" className="col" value={this.props.is_group}></input>
+                    <div className="col btn btn-danger text-white col-sm-1" onClick={this.props.on_delete}><i className="fa fa-trash"></i></div>
+                </div>
+            </>}
+        </>);
     }
 };
 
@@ -65,6 +72,10 @@ function EditMenu(props) {
     )
 }
 
+function EditLamp(props) {
+    return <div>EDIT</div>;
+}
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -77,7 +88,6 @@ class App extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
-        console.log(this.state.switches)
     }
 
     handleChange(event) {
@@ -98,10 +108,9 @@ class App extends Component {
         let lamps = this.state.switches.value.map(s => {
             const key = s.name + " " + s.group;
             const is_group = s.name == "all";
-            const name = is_group ? 'group' : s.name;
-            const lamp = ((idx) => <Lamp index={s.name} is_group={is_group} name={name} on_response={this.response} key={key} id_={key} on_delete={() => this.deleteRow(idx)} editable={this.state.editable}></Lamp>)(index);
+            const lamp = ((idx) => <Lamp index={s.name} lampstate={s} is_group={is_group} on_response={this.response} key={key} on_delete={() => this.deleteRow(idx)} editable={this.state.editable}/>)(index);
             index += 1;
-            return lamp
+            return lamp;
         });
 		return (
             <>
