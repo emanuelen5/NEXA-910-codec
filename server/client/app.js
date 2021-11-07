@@ -23,19 +23,20 @@ class Lamp extends Component {
     }
 
     render() {
+        const icon =  this.props.is_group ? {on: "mdi-lightbulb-group", off: "mdi-lightbulb-group-off"} : {on: "mdi-lightbulb-on", off: "mdi-lightbulb-off"};
         return (
             <div className="row">
                 <div className="col-sm-2">Lamp {this.props.name}</div>
                 <div className="col btn btn-light w-50" onClick={() => this.command(true)}>
-                    <i className="mdi mdi-lightbulb-on" aria-hidden="true"></i>
+                    <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
                     ON
                 </div>
                 <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>
-                    <i className="mdi mdi-lightbulb-off" aria-hidden="true"></i>
+                    <i className={`mdi ${icon['off']}`} aria-hidden="true"></i>
                     OFF
                 </div>
                 {this.props.editable &&
-                    <div className="col btn btn-danger text-white col-sm-1"><i className="fa fa-trash"></i></div>
+                    <div className="col btn btn-danger text-white col-sm-1" onClick={this.props.on_delete}><i className="fa fa-trash"></i></div>
                 }
             </div>
         );
@@ -75,6 +76,8 @@ class App extends Component {
             switches: props.switches || []
         };
         this.handleChange = this.handleChange.bind(this);
+        this.deleteRow = this.deleteRow.bind(this);
+        console.log(this.state.switches)
     }
 
     handleChange(event) {
@@ -85,11 +88,20 @@ class App extends Component {
         this.setState({response: data, has_response: true});
     }
 
+    deleteRow(id_) {
+        this.state.switches.value.splice(id_, 1);
+        this.forceUpdate();
+    }
+
 	render() {
+        let index = 0;
         let lamps = this.state.switches.value.map(s => {
             const key = s.name + " " + s.group;
-            const name = s.name == 'all' ? 'group' : s.name;
-            return <Lamp index={s.name} name={name} on_response={this.response} key={key} editable={this.state.editable}></Lamp>;
+            const is_group = s.name == "all";
+            const name = is_group ? 'group' : s.name;
+            const lamp = ((idx) => <Lamp index={s.name} is_group={is_group} name={name} on_response={this.response} key={key} id_={key} on_delete={() => this.deleteRow(idx)} editable={this.state.editable}></Lamp>)(index);
+            index += 1;
+            return lamp
         });
 		return (
             <>

@@ -24,19 +24,10 @@ class StorageItem {
         this.storage.setItem(this.name, this.as_string());
     };
 
-    get(name) {
-        return this.value[name];
-    };
-
     reset() {
         this.value = this.def;
         this.save();
     };
-
-    set(name, value) {
-        this.value[name] = value;
-        this.save();
-    }
 
     static load(storage, name, def = {}) {
         const previous_value = storage.getItem(name);
