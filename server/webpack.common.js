@@ -7,6 +7,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         main: './client/index.js',
+        theme: "./static/theme.scss",
     },
     module: {
         rules: [
@@ -35,6 +36,18 @@ module.exports = {
                 }, {
                     loader: 'sass-loader' // compiles Sass to CSS
                 }]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ]
             },
         ]
     },

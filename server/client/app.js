@@ -26,8 +26,14 @@ class Lamp extends Component {
         return (
             <div className="row">
                 <div className="col-sm-2">Lamp {this.props.name}</div>
-                <div className="col btn btn-light w-50" onClick={() => this.command(true)}>ON</div>
-                <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>OFF</div>
+                <div className="col btn btn-light w-50" onClick={() => this.command(true)}>
+                    <i className="mdi mdi-home-modern" aria-hidden="true"></i>
+                    ON
+                </div>
+                <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>
+                    <i className="mdi mdi-home-modern" aria-hidden="true"></i>
+                    OFF
+                </div>
                 {this.props.editable &&
                     <div className="col btn btn-danger text-white col-sm-1"><i className="fa fa-trash"></i></div>
                 }

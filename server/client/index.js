@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'jquery';
-import './bootstrap.scss'
+import './bootstrap.scss';
+import "@mdi/font/css/materialdesignicons.css";
 
 import App from './app';
 
