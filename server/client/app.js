@@ -51,12 +51,10 @@ class LampResult extends Component {
 
 function EditMenu(props) {
     return (
-        <>
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="edit_enable_checkbox" value="editable" value={props.value} onChange={props.onChange}/>
-            <label class="form-check-label" for="edit_enable_checkbox">Enable edit</label>
+        <div className="form-check form-switch">
+            <input className="form-check-input" type="checkbox" id="edit_enable_checkbox" value="editable" value={props.value} onChange={props.onChange}/>
+            <label className="form-check-label" htmlFor="edit_enable_checkbox">Enable edit</label>
         </div>
-        </>
     )
 }
 
