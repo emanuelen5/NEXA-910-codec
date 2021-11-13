@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import $ from "jquery";
 
+const GROUP_NAME = 'all';
+
 class LampCollection extends Component {
     render() {
         return (
@@ -27,7 +29,7 @@ class Lamp extends Component {
         const name = this.props.is_group ? 'group' : this.props.lampstate.name;
         return (<>
             <div className="row">
-                <div className="col-sm-2">Lamp {this.props.name}</div>
+                <div className="col-sm-2">Lamp {name}</div>
                 <div className="col btn btn-light w-50" onClick={() => this.command(true)}>
                     <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
                     ON
@@ -40,9 +42,10 @@ class Lamp extends Component {
             {this.props.editable && <>
                 <div className="row">
                     <span className="col-sm-2"></span>
-                    <input type="text" className="col" value={this.props.lampstate.name}></input>
-                    <input type="text" className="col" value={this.props.lampstate.group}></input>
-                    <input type="checkbox" className="col" value={this.props.is_group}></input>
+                    <select value={this.props.lampstate.name} onChange={this.props.on_change_name} className="col">
+                        {[1, 2, 3, GROUP_NAME].map(v => <option key={v} value={v}>{v}</option>)}
+                    </select>
+                    <input type="text" className="col" value={this.props.lampstate.group} onChange={this.props.on_change_group}></input>
                     <div className="col btn btn-danger text-white col-sm-1" onClick={this.props.on_delete}><i className="fa fa-trash"></i></div>
                 </div>
             </>}
@@ -87,6 +90,8 @@ class App extends Component {
             switches: props.switches || []
         };
         this.handleChange = this.handleChange.bind(this);
+        this.setName = this.setName.bind(this);
+        this.setGroup = this.setGroup.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
     }
 
@@ -98,17 +103,34 @@ class App extends Component {
         this.setState({response: data, has_response: true});
     }
 
+    setName(id_, name) {
+        this.state.switches.value[id_].name = name;
+        this.setState({switches: this.state.switches});
+    }
+
+    setGroup(id_, group) {
+        this.state.switches.value[id_].group = group;
+        this.setState({switches: this.state.switches});
+    }
+
     deleteRow(id_) {
         this.state.switches.value.splice(id_, 1);
-        this.forceUpdate();
+        this.setState({switches: this.state.switches});
+    }
+
+    groupChanged(id_, value) {
+        this.state.switches.value[id_].is_group = value;
+        this.setState({switches: this.state.switches});
     }
 
 	render() {
         let index = 0;
         let lamps = this.state.switches.value.map(s => {
             const key = s.name + " " + s.group;
-            const is_group = s.name == "all";
-            const lamp = ((idx) => <Lamp index={s.name} lampstate={s} is_group={is_group} on_response={this.response} key={key} on_delete={() => this.deleteRow(idx)} editable={this.state.editable}/>)(index);
+            const is_group = s.name == GROUP_NAME;
+            const lamp = ((idx) => <Lamp index={s.name} lampstate={s} is_group={is_group} on_response={this.response} key={idx} 
+                on_delete={() => this.deleteRow(idx)} editable={this.state.editable} on_change_name={(e) => this.setName(idx, e.target.value)}
+                on_change_group={e => this.setGroup(idx, e.target.value)}/>)(index);
             index += 1;
             return lamp;
         });
@@ -127,4 +149,5 @@ class App extends Component {
 	}
 };
 
+export {App, GROUP_NAME};
 export default App;
