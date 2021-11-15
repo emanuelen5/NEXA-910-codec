@@ -6,7 +6,7 @@ import './bootstrap.scss';
 import "@mdi/font/css/materialdesignicons.css";
 import "/static/theme.scss"
 
-import {App, GROUP_NAME} from './app';
+import {App, GROUP_INDEX} from './app';
 
 const STORAGE_CONFIG = 'config';
 const STORAGE_SWITCHES = 'switches';
@@ -44,10 +44,10 @@ class StorageItem {
 
 const config = new StorageItem(STORAGE_CONFIG, {is_initialized: false});
 const switches = new StorageItem(STORAGE_SWITCHES, [
-        {name: '1',   index: 0,  group: 0x25},
-        {name: '2',   index: 1,  group: 0x25},
-        {name: '3',   index: 2,  group: 0x25},
-        {name: GROUP_NAME, index: -1, group: 0x25},
+        {name: 'lamp 1',   index: 0,  group: 0x25},
+        {name: 'lamp 2',   index: 1,  group: 0x25},
+        {name: 'lamp 3',   index: 2,  group: 0x25},
+        {name: 'test group', index: GROUP_INDEX, group: 0x25},
 ]);
 
 ReactDOM.render(
