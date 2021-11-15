@@ -6,7 +6,7 @@ const GROUP_NAME = 'all';
 class LampCollection extends Component {
     render() {
         return (
-            <div className="container">{this.props.children}</div>
+            <div className="container d-flex flex-column min-vh-100">{this.props.children}</div>
         );
     }
 };
@@ -57,7 +57,7 @@ class LampResult extends Component {
     render() {
         const responseText = this.props.has_response ? "Response: " + JSON.stringify(this.props.response) : "Ready";
         return (
-            <div className="row">
+            <div className="row container">
                 <div className="col text-info text-center">
                     {responseText}
                 </div>
@@ -140,9 +140,10 @@ class App extends Component {
 			    <h1 className="display-4 text-center">
                     NEXA control page
                 </h1>
-                <EditMenu value={this.state.editable} onChange={this.handleChange}/>
                 {lamps}
                 <LampResult has_response={this.state.has_response} response={this.state.response}/>
+                <div class="flex-grow-1"></div>
+                <EditMenu value={this.state.editable} onChange={this.handleChange}/>
             </LampCollection>
             </>
 		);
