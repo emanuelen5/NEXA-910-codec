@@ -27,30 +27,41 @@ class Lamp extends Component {
     render() {
         const is_group = this.props.index == GROUP_INDEX;
         const icon =  is_group ? {on: "mdi-lightbulb-group", off: "mdi-lightbulb-group-off"} : {on: "mdi-lightbulb-on", off: "mdi-lightbulb-off"};
-        const name = is_group ? this.props.lampstate.name + ' (group)' : this.props.lampstate.name;
-        return (<>
-            <div className="row">
-                <div className="col-sm-2">{name}</div>
-                <div className="col btn btn-light w-50" onClick={() => this.command(true)}>
-                    <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
-                    ON
-                </div>
-                <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>
-                    <i className={`mdi ${icon['off']}`} aria-hidden="true"></i>
-                    OFF
-                </div>
-            </div>
-            {this.props.editable && <>
+        const name = is_group ? this.props.name + ' (group)' : this.props.name;
+        if (this.props.editable) {
+            return (
                 <div className="row">
-                    <input type="text" className="col" value={this.props.lampstate.name} onChange={this.props.on_change_name}></input>
-                    <select value={this.props.lampstate.index} onChange={this.props.on_change_index} className="col">
-                        {[[1, "1"], [2, "2"], [3, "3"], [GROUP_INDEX, "group"]].map(v => <option key={v[0]} value={v[0]}>{v[1]}</option>)}
+                    <input type="text" className="col-sm-4" value={this.props.name} onChange={this.props.on_change_name}></input>
+                    <select value={this.props.index} onChange={this.props.on_change_index} className="col">
+                        {[[0, "1"], [1, "2"], [2, "3"], [GROUP_INDEX, "group"]].map(v => <option key={v[0]} value={v[0]}>{v[1]}</option>)}
                     </select>
-                    <input type="text" className="col" value={this.props.lampstate.group} onChange={this.props.on_change_group}></input>
+                    <input type="text" className="col" value={this.props.group} onChange={this.props.on_change_group}></input>
+                    <div className="col btn btn-light col-sm-2" onClick={() => this.command(true)}>
+                        <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
+                        ON
+                    </div>
+                    <div className="col btn btn-dark col-sm-2" onClick={() => this.command(false)}>
+                        <i className={`mdi ${icon['off']}`} aria-hidden="true"></i>
+                        OFF
+                    </div>
                     <div className="col btn btn-danger text-white col-sm-1" onClick={this.props.on_delete}><i className="fa fa-trash"></i></div>
                 </div>
-            </>}
-        </>);
+            );
+        } else {
+            return (
+                <div className="row">
+                    <div className="col-sm-2">{name}</div>
+                    <div className="col btn btn-light w-50" onClick={() => this.command(true)}>
+                        <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
+                        ON
+                    </div>
+                    <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>
+                        <i className={`mdi ${icon['off']}`} aria-hidden="true"></i>
+                        OFF
+                    </div>
+                </div>
+            );
+        }
     }
 };
 
@@ -65,6 +76,15 @@ class LampResult extends Component {
             </div>
         );
     }
+}
+
+function AddLamp(props) {
+    return (props.editable &&
+        <div className="row">
+            <button className="col btn btn-success" onClick={props.on_click}>
+                <i className="mdi mdi-plus-box" aria-hidden="true"></i> Add lamp</button>
+        </div>
+    );
 }
 
 function EditMenu(props) {
@@ -90,6 +110,7 @@ class App extends Component {
         this.setName = this.setName.bind(this);
         this.setIndex = this.setIndex.bind(this);
         this.setGroup = this.setGroup.bind(this);
+        this.addRow = this.addRow.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
     }
 
@@ -103,28 +124,38 @@ class App extends Component {
 
     setName(id_, name) {
         this.state.switches.value[id_].name = name;
+        this.state.switches.save();
         this.setState({switches: this.state.switches});
     }
 
     setIndex(id_, index) {
         this.state.switches.value[id_].index = index;
+        this.state.switches.save();
         this.setState({switches: this.state.switches});
     }
 
     setGroup(id_, group) {
         this.state.switches.value[id_].group = group;
+        this.state.switches.save();
         this.setState({switches: this.state.switches});
     }
 
     deleteRow(id_) {
         this.state.switches.value.splice(id_, 1);
+        this.state.switches.save();
+        this.setState({switches: this.state.switches});
+    }
+
+    addRow() {
+        this.state.switches.value.push({name: 'new lamp', index: 0, group: 0x00});
+        this.state.switches.save();
         this.setState({switches: this.state.switches});
     }
 
 	render() {
         let index = 0;
         let lamps = this.state.switches.value.map(s => {
-            const lamp = ((idx) => <Lamp index={s.index} name={s.name} lampstate={s} on_response={this.response} key={idx} 
+            const lamp = ((idx) => <Lamp index={s.index} name={s.name} group={s.group} on_response={this.response} key={idx} 
                 on_delete={() => this.deleteRow(idx)} editable={this.state.editable} on_change_index={(e) => this.setIndex(idx, e.target.value)} on_change_name={(e) => this.setName(idx, e.target.value)} on_change_group={e => this.setGroup(idx, e.target.value)}/>)(index);
             index += 1;
             return lamp;
@@ -136,6 +167,7 @@ class App extends Component {
                     NEXA control page
                 </h1>
                 {lamps}
+                <AddLamp editable={this.state.editable} on_click={this.addRow}></AddLamp>
                 <LampResult has_response={this.state.has_response} response={this.state.response}/>
                 <div className="flex-grow-1"></div>
                 <EditMenu value={this.state.editable} onChange={this.handleChange}/>
