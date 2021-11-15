@@ -32,10 +32,10 @@ class Lamp extends Component {
             return (
                 <div className="row">
                     <input type="text" className="col-sm-4" value={this.props.name} onChange={this.props.on_change_name}></input>
+                    <input type="text" className="col" value={this.props.group} onChange={this.props.on_change_group}></input>
                     <select value={this.props.index} onChange={this.props.on_change_index} className="col">
                         {[[0, "1"], [1, "2"], [2, "3"], [GROUP_INDEX, "group"]].map(v => <option key={v[0]} value={v[0]}>{v[1]}</option>)}
                     </select>
-                    <input type="text" className="col" value={this.props.group} onChange={this.props.on_change_group}></input>
                     <div className="col btn btn-light col-sm-2" onClick={() => this.command(true)}>
                         <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
                         ON
@@ -50,8 +50,8 @@ class Lamp extends Component {
         } else {
             return (
                 <div className="row">
-                    <div className="col-sm-2">{name}</div>
-                    <div className="col btn btn-light w-50" onClick={() => this.command(true)}>
+                    <div className="lead col-sm-2 text-bf"><abbr title={`group=${this.props.group}, index=${this.props.index}`}>{name}</abbr></div>
+                    <div className="col btn btn-outline-light w-50" onClick={() => this.command(true)}>
                         <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
                         ON
                     </div>
