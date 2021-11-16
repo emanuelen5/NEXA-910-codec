@@ -12,5 +12,13 @@ Includes two projects, one with firmware that runs on an Arduino-compatible boar
 ## Arduino
 The low-level protocol for controlling NEXA switches. Commands are issued through its UART interface. It sends the control commands through a radio transmitter by bit-banging ON-OFF coded messages that contains the switch ID and its state.
 
+The hardware requires very few components (an Arduino and transmitter + antenna), and is easy to assemble.
+
+![Arduino nano programmed with the firmware, with an additional receiver connected.](./controller.png)
+
 ## Web application
 A REST-wrapper for the Arduino that lets it be controlled through simple HTTP requests. It also exposes a simple web app for issuing requests, and storing configurations with switch names and groups.
+
+The application is built on:
+* Python + Flask for the REST web server.
+* React + Bootstrap for the frontend, which is built with NPM using Webpack.
