@@ -31,9 +31,10 @@ class Lamp extends Component {
         if (this.props.editable) {
             return (
                 <div className="row">
-                    <input type="text" className="col-sm-4" value={this.props.name} onChange={this.props.on_change_name}></input>
-                    <input type="text" className="col" value={this.props.group} onChange={this.props.on_change_group}></input>
-                    <select value={this.props.index} onChange={this.props.on_change_index} className="col">
+                    <div style={{height: "1em"}}></div>
+                    <input type="text" className="col-sm-4 form-control" value={this.props.name} onChange={this.props.on_change_name}></input>
+                    <input type="text" className="col form-control" value={this.props.group} onChange={this.props.on_change_group}></input>
+                    <select value={this.props.index} onChange={this.props.on_change_index} className="col form-select">
                         {[[0, "1"], [1, "2"], [2, "3"], [GROUP_INDEX, "group"]].map(v => <option key={v[0]} value={v[0]}>{v[1]}</option>)}
                     </select>
                     <div className="col btn btn-light col-sm-2" onClick={() => this.command(true)}>
@@ -50,12 +51,13 @@ class Lamp extends Component {
         } else {
             return (
                 <div className="row">
-                    <div className="lead col-sm-2 text-bf"><abbr title={`group=${this.props.group}, index=${this.props.index}`}>{name}</abbr></div>
-                    <div className="col btn btn-outline-light w-50" onClick={() => this.command(true)}>
+                    <div class="d-block d-sm-none" style={{height: "1em"}}></div>
+                    <div className="lead col-sm-8 text-bf"><abbr title={`group=${this.props.group}, index=${this.props.index}`}>{name}</abbr></div>
+                    <div className="col btn btn-outline-light col-sm" onClick={() => this.command(true)}>
                         <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
                         ON
                     </div>
-                    <div className="col btn btn-dark w-50" onClick={() => this.command(false)}>
+                    <div className="col btn btn-dark col-sm" onClick={() => this.command(false)}>
                         <i className={`mdi ${icon['off']}`} aria-hidden="true"></i>
                         OFF
                     </div>
@@ -155,7 +157,7 @@ class App extends Component {
 	render() {
         let index = 0;
         let lamps = this.state.switches.value.map(s => {
-            const lamp = ((idx) => <Lamp index={s.index} name={s.name} group={s.group} on_response={this.response} key={idx} 
+            const lamp = ((idx) => <Lamp index={s.index} name={s.name} group={s.group} on_response={this.response}  key={idx}
                 on_delete={() => this.deleteRow(idx)} editable={this.state.editable} on_change_index={(e) => this.setIndex(idx, e.target.value)} on_change_name={(e) => this.setName(idx, e.target.value)} on_change_group={e => this.setGroup(idx, e.target.value)}/>)(index);
             index += 1;
             return lamp;
