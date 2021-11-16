@@ -1,2 +1,5 @@
-FLASK_APP=server.py FLASK_ENV=development \
-	flask run --host 0.0.0.0 --port 5000 --extra-files "*.py:src/*"
+GUNICORN_FLAGS="--reload --access-logfile - --worker-class sync"
+GUNICORN_WORKERS=1
+GUNICORN_PORT=5001
+
+gunicorn $GUNICORN_FLAGS --workers=$GUNICORN_WORKERS -b :$GUNICORN_PORT server:app

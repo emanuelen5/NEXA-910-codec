@@ -1,0 +1,55 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+
+* {
+    @media screen and (prefers-color-scheme: dark) {
+        $blue:    #014dc0;
+        $indigo:  #5107c7;
+        $purple:  #6f42c1;
+        $pink:    #d63384;
+        $red:     #a01826;
+        $orange:  #fd7e14;
+        $yellow:  #ffc107;
+        $green:   #05693a;
+        $teal:    #0eb885;
+        $cyan:    #0dcaf0;
+
+        /* redefine theme colors for dark theme */
+        $primary: #012345;
+        $secondary: #111111;
+        $success: #222222;
+        $dark: #000;
+        $light: #ccc;
+        
+        $theme-colors: (
+            "primary": $primary,
+            "secondary": $secondary,
+            "success": $success,
+            "danger": $red,
+            "info": $cyan,
+            "dark": $dark,
+            "light": $light,
+        );
+
+        /* redefine theme color variables */
+        @each $color, $value in $theme-colors {
+            --#{$variable-prefix}#{$color}: #{$value};
+        }
+
+        /* redefine theme color rgb vars (used for bg- colors) */
+        $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+        @each $color, $value in $theme-colors-rgb {
+            --#{$variable-prefix}#{$color}-rgb: #{$value};
+        }
+
+        $body-color: #eeeeee;
+        $body-bg: #263C5C;
+
+        --#{$variable-prefix}body-color: #{$body-color};
+        --#{$variable-prefix}body-bg: #{$body-bg};
+
+    }
+}
+
+@import "~bootstrap/scss/bootstrap";
