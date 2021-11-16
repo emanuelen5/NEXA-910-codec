@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'bootstrap';
 import 'jquery';
+import './bootstrap.scss';
+import "@mdi/font/css/materialdesignicons.css";
+import "/static/theme.scss"
 
-require('./index.html');
-import App from './app';
+import {App, GROUP_INDEX} from './app';
 
 const STORAGE_CONFIG = 'config';
 const STORAGE_SWITCHES = 'switches';
@@ -23,19 +24,10 @@ class StorageItem {
         this.storage.setItem(this.name, this.as_string());
     };
 
-    get(name) {
-        return this.value[name];
-    };
-
     reset() {
         this.value = this.def;
         this.save();
     };
-
-    set(name, value) {
-        this.value[name] = value;
-        this.save();
-    }
 
     static load(storage, name, def = {}) {
         const previous_value = storage.getItem(name);
@@ -52,10 +44,10 @@ class StorageItem {
 
 const config = new StorageItem(STORAGE_CONFIG, {is_initialized: false});
 const switches = new StorageItem(STORAGE_SWITCHES, [
-        {name: '1',   index: 0,  group: 0x25},
-        {name: '2',   index: 1,  group: 0x25},
-        {name: '3',   index: 2,  group: 0x25},
-        {name: 'all', index: -1, group: 0x25},
+        {name: 'lamp 1',   index: 0,  group: 0x25},
+        {name: 'lamp 2',   index: 1,  group: 0x25},
+        {name: 'lamp 3',   index: 2,  group: 0x25},
+        {name: 'test group', index: GROUP_INDEX, group: 0x25},
 ]);
 
 ReactDOM.render(
