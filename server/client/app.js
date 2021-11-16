@@ -37,7 +37,7 @@ class Lamp extends Component {
                     <input type="text" className="col-10 col-sm-3" value={this.props.group} onChange={this.props.on_change_group}></input>
                     <span className="input-group-text col-2 col-sm-2">Index</span>
                     <select value={this.props.index} onChange={this.props.on_change_index} className="col-10 col-sm-3">
-                        {[[0, "1"], [1, "2"], [2, "3"], [GROUP_INDEX, "group"]].map(v => <option key={v[0]} value={v[0]}>{v[1]}</option>)}
+                        {[[1, "1"], [2, "2"], [3, "3"], [GROUP_INDEX, "group"]].map(v => <option key={v[0]} value={v[0]}>{v[1]}</option>)}
                     </select>
                     <div className="btn btn-danger text-white col-12 col-sm-2 order-5 order-sm-0" onClick={this.props.on_delete}><i className="fa fa-trash"></i></div>
                     <div className="col-6 btn btn-light col-sm" onClick={() => this.command(true)}>
