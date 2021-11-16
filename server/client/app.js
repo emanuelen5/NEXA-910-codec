@@ -6,7 +6,7 @@ const GROUP_INDEX = 'all';
 class LampCollection extends Component {
     render() {
         return (
-            <div className="container d-flex flex-column min-vh-100">{this.props.children}</div>
+            <div className="container g-sm-1 d-flex flex-column min-vh-100">{this.props.children}</div>
         );
     }
 };
@@ -30,28 +30,29 @@ class Lamp extends Component {
         const name = is_group ? this.props.name + ' (group)' : this.props.name;
         if (this.props.editable) {
             return (
-                <div className="row">
-                    <div style={{height: "1em"}}></div>
-                    <input type="text" className="col-sm-4 form-control" value={this.props.name} onChange={this.props.on_change_name}></input>
-                    <input type="text" className="col form-control" value={this.props.group} onChange={this.props.on_change_group}></input>
-                    <select value={this.props.index} onChange={this.props.on_change_index} className="col form-select">
+                <div className="row mb-3">
+                    <span className="input-group-text col-2">Name</span>
+                    <input type="text" className="col-10" value={this.props.name} onChange={this.props.on_change_name}></input>
+                    <span className="input-group-text col-2 col-sm-2">Group ID</span>
+                    <input type="text" className="col-10 col-sm-3" value={this.props.group} onChange={this.props.on_change_group}></input>
+                    <span className="input-group-text col-2 col-sm-2">Index</span>
+                    <select value={this.props.index} onChange={this.props.on_change_index} className="col-10 col-sm-3">
                         {[[0, "1"], [1, "2"], [2, "3"], [GROUP_INDEX, "group"]].map(v => <option key={v[0]} value={v[0]}>{v[1]}</option>)}
                     </select>
-                    <div className="col btn btn-light col-sm-2" onClick={() => this.command(true)}>
+                    <div className="btn btn-danger text-white col-12 col-sm-2 order-5 order-sm-0" onClick={this.props.on_delete}><i className="fa fa-trash"></i></div>
+                    <div className="col-6 btn btn-light col-sm" onClick={() => this.command(true)}>
                         <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
                         ON
                     </div>
-                    <div className="col btn btn-dark col-sm-2" onClick={() => this.command(false)}>
+                    <div className="col-6 btn btn-dark col-sm" onClick={() => this.command(false)}>
                         <i className={`mdi ${icon['off']}`} aria-hidden="true"></i>
                         OFF
                     </div>
-                    <div className="col btn btn-danger text-white col-sm-1" onClick={this.props.on_delete}><i className="fa fa-trash"></i></div>
                 </div>
             );
         } else {
             return (
-                <div className="row">
-                    <div class="d-block d-sm-none" style={{height: "1em"}}></div>
+                <div className="row mb-3 mb-sm-0">
                     <div className="lead col-sm-8 text-bf"><abbr title={`group=${this.props.group}, index=${this.props.index}`}>{name}</abbr></div>
                     <div className="col btn btn-outline-light col-sm" onClick={() => this.command(true)}>
                         <i className={`mdi ${icon['on']}`} aria-hidden="true"></i>
